@@ -158,7 +158,7 @@ workout_data_clean.head()
 # In[14]:
 
 
-workout_data_clean.fillna("", inplace=True)
+workout_data_clean.fillna(-1, inplace=True)
 workout_data_clean.head()
 
 
