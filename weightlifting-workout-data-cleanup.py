@@ -251,37 +251,31 @@ workout_data_list[0:5]
 # In[25]:
 
 
-workout_data_list.insert(0, column_names)
-
-
-# In[26]:
-
-
 workout_data_list[0:5]
 
 
-# In[27]:
+# In[26]:
 
 
 workout_data_tuple = [tuple(i) for i in workout_data_list]
 workout_data_tuple[0:5]
 
 
-# In[28]:
+# In[27]:
 
 
 workout_data_database = pd.DataFrame(workout_data_tuple)
 workout_data_database.head()
 
 
-# In[29]:
+# In[28]:
 
 
 workout_data_database.columns = column_names
 workout_data_database.head()
 
 
-# In[30]:
+# In[29]:
 
 
 workout_data_database.to_csv(r'C:\Users\jacqu\Desktop\Github Portfolio\weightlifting-workout-tracker\workout_data_database.csv')
