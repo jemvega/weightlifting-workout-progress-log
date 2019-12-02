@@ -94,7 +94,7 @@ As of right now, I have only been manually testing the app. I would like to crea
 * I keep receiving a "FutureWarning: Using a non-tuple sequence for multidimensial indexing is deprecated;" in my `<weightlifting-workout-data-visualizations>` file for what I believe is a scipy issue. 
 
 ## Future Changes/Caculations/Features
-Here are some features I would lika ne to add in the future:
+Here are some features I would like to add in the future:
 * I would like to start logging my weight on a daily basis as one of the key metrics of health and fitness. 
 * I would like to start logging my sleep start and end times. 
 * I would like to log whether my workout sets were done as a superset or compound set. I believe there might be a positive correlation between the duration of my workout and a superset workout. 
