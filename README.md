@@ -42,6 +42,8 @@ Once I had a clean data set, `<workout_data_database.csv`>, I used Tableau Publi
 
 I eventually decided to use Python's Pandas and Seaborn in my `<weightlifting-workout-data-visualizations>` file to see if I could replicate my Tableau visualizations. I spent much more time plotting my graphs using Pandas and Seaborn than I did using Tableau, but again, I see this as a good opportunity for practice. 
 
+You can see my graphs in my [weightlifting-workout-data-visualizations.md](https://github.com/jemvega/weightlifting-workout-progress-log/blob/branch-jv/weightlifting-workout-data-visualizations.md)
+
 ## Stats
 Here are a few stats I have after analyzing the data:
 1. The average duration of my workouts in minutes out of 111 timed workouts is 77.41 minutes.
