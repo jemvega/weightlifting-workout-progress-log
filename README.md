@@ -100,6 +100,7 @@ Here are some features I would lika ne to add in the future:
 * I would like to log whether my workout sets were done as a superset or compound set. I believe there might be a positive correlation between the duration of my workout and a superset workout. 
 * While there are data sets of powerlifting and olympic lifting maxes, I am more interested in the training data sets that produce maximum lifts. If I can find fitness training data sets, I would like to replicate this kind of analysis to observe the results to which various training programs can lead us. I imagine this can be replicated with other individual sports, e.g. running, swimming, cycling, CrossFit, etc. 
 * I would like to analyze on which days I most often workout, as well as figure out what time in the day I most often workout. 
+* I would like to add two data columns for primary and secondary muscle groups for each exercise. If I do end up adding my accessory and supplemental lifts, I think I may be able to answer questions like, "Which muscle group is being over or under worked?" "Which muscle group has seen the most improvement?" "Which muscle group do I favor to target?" 
 
 ## Built With
 
