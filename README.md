@@ -104,13 +104,13 @@ Here are some features I would lika ne to add in the future:
 
 ## Built With
 
-*[Python](https://www.python.org/downloads/) programming language
+* [Python](https://www.python.org/downloads/) programming language
 
-*[Anaconda Navigator](https://docs.anaconda.com/anaconda/navigator/) GUI
+* [Anaconda Navigator](https://docs.anaconda.com/anaconda/navigator/) GUI
 
 * [MySQL] (https://mysql.com) Database
 
-*[Notepad++](https://notepad-plus-plus.org/) for README.md and LICENSE.txt
+* [Notepad++](https://notepad-plus-plus.org/) for README.md and LICENSE.txt
 
 ## Contributing
 
