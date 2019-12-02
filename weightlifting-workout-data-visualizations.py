@@ -147,7 +147,7 @@ plt.savefig("Workout Count per Exercise.png")
 # A dataframe for max weight by each exercise. 
 exercise_max = workout_data[["exercise", "weight_lbs"]].groupby("exercise").max()
 exercise_max["exercise"] = exercise_max.index
-exercise_max.head()
+exercise_max
 
 
 # In[15]:
@@ -178,7 +178,7 @@ plt.savefig("Max Lifts per Exercise.png")
 # A dataframe for total intensity(total weight lifted) for each exercise
 total_intensity = workout_data[["exercise", "weight_lbs"]].groupby("exercise").sum()
 total_intensity["exercise"] = total_intensity.index
-total_intensity.head()
+total_intensity
 
 
 # In[17]:
@@ -211,7 +211,7 @@ total_reps = workout_data["sets"]*workout_data["reps"]
 workout_data["total volume"] = total_reps
 total_volume = workout_data[["exercise", "total volume"]].groupby("exercise").sum()
 total_volume["exercise"] = total_volume.index
-total_volume.head()
+total_volume
 
 
 # In[19]:
@@ -239,25 +239,74 @@ plt.savefig("Total Volume.png")
 # In[20]:
 
 
-squats = workout_data[["exercise", "datetime", "weight_lbs"]].loc[(workout_data["exercise"] == "BackSquat") | (workout_data["exercise"] == "OverheadSquat") | (workout_data["exercise"] == "FrontSquat")]
-squats.head()
+squats_intensity = workout_data[
+    ["exercise", "datetime", "weight_lbs"]
+    ].loc[
+    (workout_data["exercise"] == "BackSquat") | 
+    (workout_data["exercise"] == "OverheadSquat") | 
+    (workout_data["exercise"] == "FrontSquat")
+    ]
+squats_intensity.head()
 
 
 # In[21]:
 
 
-presses = workout_data[["exercise", "datetime", "weight_lbs"]].loc[(workout_data["exercise"] == "BenchPress") | (workout_data["exercise"] == "ShoulderPress")]
-presses.head()
+squats_volume = workout_data[
+    ["exercise", "datetime", "total volume"]
+    ].loc[
+    (workout_data["exercise"] == "BackSquat") | 
+    (workout_data["exercise"] == "OverheadSquat") | 
+    (workout_data["exercise"] == "FrontSquat")
+    ]
+squats_volume.head()
 
 
 # In[22]:
 
 
-oly_lifts = workout_data[["exercise", "datetime", "weight_lbs"]].loc[(workout_data["exercise"] == "Clean&Jerk") | (workout_data["exercise"] == "Snatch")]
-oly_lifts.head()
+presses_intensity = workout_data[
+    ["exercise", "datetime", "weight_lbs"]
+    ].loc[(workout_data["exercise"] == "BenchPress") | 
+    (workout_data["exercise"] == "ShoulderPress")]
+presses_intensity.head()
 
 
 # In[23]:
+
+
+presses_volume = workout_data[
+    ["exercise", "datetime", "total volume"]
+    ].loc[(workout_data["exercise"] == "BenchPress") | 
+    (workout_data["exercise"] == "ShoulderPress")
+    ]
+presses_volume.head()
+
+
+# In[24]:
+
+
+oly_lifts_intensity = workout_data[
+    ["exercise", "datetime", "weight_lbs"]
+    ].loc[
+    (workout_data["exercise"] == "Clean&Jerk") | 
+    (workout_data["exercise"] == "Snatch")
+    ]
+oly_lifts_intensity.head()
+
+
+# In[25]:
+
+
+oly_lifts_volume = workout_data[
+    ["exercise", "datetime", "total volume"]
+    ].loc[(workout_data["exercise"] == "Clean&Jerk") | 
+    (workout_data["exercise"] == "Snatch")
+    ]
+oly_lifts_volume.head()
+
+
+# In[26]:
 
 
 # Plot comparison for intensity for squats.
@@ -267,12 +316,12 @@ sns.set_context("paper", font_scale = 2)
 graph = sns.lineplot(
     x="datetime", 
     y="weight_lbs", 
-    data=squats, 
+    data=squats_intensity, 
     palette=colors[1:4], 
     hue="exercise", 
     linewidth=3
     )
-graph.set_xticklabels(squats["datetime"].values, rotation = 30)
+graph.set_xticklabels(squats_intensity["datetime"].values, rotation = 30)
 graph.xaxis.set_major_locator(mdates.WeekdayLocator(interval=5))
 graph.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%y"))
 graph.set(
@@ -284,12 +333,44 @@ graph.set(
 plt.legend(
     title="Exercise", 
     loc="upper right", 
-    labels=squats["exercise"].unique()
+    labels=squats_intensity["exercise"].unique()
     )
 plt.savefig("Squats Intensity.png")
 
 
-# In[24]:
+# In[27]:
+
+
+# Plot comparison for intensity for squats.
+plt.figure(figsize = (16,9))
+
+sns.set_context("paper", font_scale = 2)
+graph = sns.lineplot(
+    x="datetime", 
+    y="total volume", 
+    data=squats_volume, 
+    palette=colors[1:4], 
+    hue="exercise", 
+    linewidth=3
+    )
+graph.set_xticklabels(squats_volume["datetime"].values, rotation = 30)
+graph.xaxis.set_major_locator(mdates.WeekdayLocator(interval=5))
+graph.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%y"))
+graph.set(
+    title="Squats Volume vs. Time", 
+    xlabel="Time", 
+    ylabel="Total Reps per Session", 
+    yticks=np.arange(0, 55, 5)
+    )
+plt.legend(
+    title="Exercise", 
+    loc="upper left", 
+    labels=squats_volume["exercise"].unique()
+    )
+plt.savefig("Squats Volume.png")
+
+
+# In[28]:
 
 
 # Plot comparison for intensity for squats.
@@ -299,12 +380,12 @@ sns.set_context("paper", font_scale = 2)
 graph = sns.lineplot(
     x="datetime", 
     y="weight_lbs", 
-    data=presses, 
+    data=presses_intensity, 
     palette=colors[4:6], 
     hue="exercise", 
     linewidth=3
     )
-graph.set_xticklabels(presses["datetime"].values, rotation = 30)
+graph.set_xticklabels(presses_intensity["datetime"].values, rotation = 30)
 graph.xaxis.set_major_locator(mdates.WeekdayLocator(interval=5))
 graph.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%y"))
 graph.set(
@@ -316,12 +397,44 @@ graph.set(
 plt.legend(
     title="Exercise", 
     loc="upper right", 
-    labels=presses["exercise"].unique()
+    labels=presses_intensity["exercise"].unique()
     )
 plt.savefig("Presses Intensity.png")
 
 
-# In[25]:
+# In[29]:
+
+
+# Plot comparison for intensity for squats.
+plt.figure(figsize = (16,9))
+
+sns.set_context("paper", font_scale = 2)
+graph = sns.lineplot(
+    x="datetime", 
+    y="total volume", 
+    data=presses_volume, 
+    palette=colors[4:6], 
+    hue="exercise", 
+    linewidth=3
+    )
+graph.set_xticklabels(presses_volume["datetime"].values, rotation = 30)
+graph.xaxis.set_major_locator(mdates.WeekdayLocator(interval=5))
+graph.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%y"))
+graph.set(
+    title="Presses Volume vs. Time", 
+    xlabel="Time", 
+    ylabel="Total Reps per Session", 
+    yticks=np.arange(0, 55, 5)
+    )
+plt.legend(
+    title="Exercise", 
+    loc="upper left", 
+    labels=presses_volume["exercise"].unique()
+    )
+plt.savefig("Presses Volume.png")
+
+
+# In[30]:
 
 
 # Plot comparison for intensity for squats.
@@ -331,12 +444,12 @@ sns.set_context("paper", font_scale = 2)
 graph = sns.lineplot(
     x="datetime", 
     y="weight_lbs", 
-    data=oly_lifts, 
+    data=oly_lifts_intensity, 
     palette=colors[7:9], 
     hue="exercise", 
     linewidth=3
     )
-graph.set_xticklabels(oly_lifts["datetime"].values, rotation = 30)
+graph.set_xticklabels(oly_lifts_intensity["datetime"].values, rotation = 30)
 graph.xaxis.set_major_locator(mdates.WeekdayLocator(interval=5))
 graph.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%y"))
 graph.set(
@@ -348,7 +461,149 @@ graph.set(
 plt.legend(
     title="Exercise", 
     loc="upper right", 
-    labels=oly_lifts["exercise"].unique()
+    labels=oly_lifts_intensity["exercise"].unique()
     )
 plt.savefig("Olympic Lifts Intensity.png")
+
+
+# In[31]:
+
+
+# Plot comparison for intensity for squats.
+plt.figure(figsize = (16,9))
+
+sns.set_context("paper", font_scale = 2)
+graph = sns.lineplot(
+    x="datetime", 
+    y="total volume", 
+    data=oly_lifts_volume, 
+    palette=colors[7:9], 
+    hue="exercise", 
+    linewidth=3
+    )
+graph.set_xticklabels(oly_lifts_volume["datetime"].values, rotation = 30)
+graph.xaxis.set_major_locator(mdates.WeekdayLocator(interval=5))
+graph.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%y"))
+graph.set(
+    title="Olympic Lifts Volume vs. Time", 
+    xlabel="Time", 
+    ylabel="Total Reps per Session",
+    yticks=np.arange(0, 30, 3)
+    )
+plt.legend(
+    title="Exercise", 
+    loc="upper right", 
+    labels=oly_lifts_volume["exercise"].unique()
+    )
+plt.savefig("Olympic Lifts Volume.png")
+
+
+# In[32]:
+
+
+""" Analytics Below """
+
+
+# In[33]:
+
+
+# Shoulder Press Volume to Deadlift Volme Percent Ratio
+dl = total_volume.loc["Deadlift"][0]
+sp = total_volume.loc["ShoulderPress"][0]
+
+round(sp/dl*100, 2)
+
+
+# In[34]:
+
+
+# Deadlift Max to Shoulder Press Max Percent Ratio
+dl = exercise_max.loc["Deadlift"][0]
+sp = exercise_max.loc["ShoulderPress"][0]
+
+round(dl/sp*100, 2)
+
+
+# In[35]:
+
+
+# Squats Total Volume to Presses Total Volume Percent Ratio
+sq = squats_volume["total volume"].sum()
+pr = presses_volume["total volume"].sum()
+
+round(sq/pr*100, 2)
+
+
+# In[36]:
+
+
+# Squts Total Intensity to Presses Total Intensity Percent Ratio
+sq = squats_intensity["weight_lbs"].sum()
+pr = presses_intensity["weight_lbs"].sum()
+
+round(sq/pr*100, 2)
+
+
+# In[37]:
+
+
+# Snatch Total Volume to Clean&Jerk Total Volume Percent Ratio
+cj = total_volume.loc["Clean&Jerk"][0]
+sn = total_volume.loc["Snatch"][0]
+
+round(sn/cj*100, 2)
+
+
+# In[38]:
+
+
+# Snatch Total Intensity to Clean&Jerk Total Intensity Percent Ratio
+cj = total_intensity.loc["Clean&Jerk"][0]
+sn = total_intensity.loc["Snatch"][0]
+
+round(sn/cj*100, 2)
+
+
+# In[39]:
+
+
+# Front Squat Max to Back Squat Max Percent Ratio
+fs = exercise_max.loc["FrontSquat"][0]
+bs = exercise_max.loc["BackSquat"][0]
+
+round(fs/bs*100, 2)
+
+
+# In[40]:
+
+
+# Average duration of workouts out of 111 workouts with non-null data in duration_minutes
+len(workout_data["duration_minutes"].loc[workout_data["duration_minutes"] != -1]) # No. workouts with non-null duration
+
+avg_duration = workout_data["duration_minutes"].loc[workout_data["duration_minutes"] != -1].mean()
+round(avg_duration, 2)
+
+
+# In[41]:
+
+
+# Average number of sets in workouts
+avg_sets = workout_data["sets"].mean()
+round(avg_sets, 2)
+
+
+# In[42]:
+
+
+# Average number of reps in workouts
+avg_reps = workout_data["reps"].mean()
+round(avg_reps, 2)
+
+
+# In[43]:
+
+
+# Average weight lifted in workouts
+avg_weight = workout_data["weight_lbs"].mean()
+round(avg_weight, 2)
 
