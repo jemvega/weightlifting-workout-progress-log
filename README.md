@@ -7,20 +7,20 @@ As a hobbyist weightlifter, I started this project to find a basic, efficient so
 My interest in weightlifting began recently because of a shift in my fitness goals: I wanted to gain strength and improve my physique. I quickly learned that, if I wanted to observe my progress towards my achieving my goals, I needed to have objective and quantitative measurements. I began studying various fitness principles and methodologies until I could design my own weightlifting program - i.e. a schedule of selected exercises, frequency of training, intensity (weight, resistance, interval between sets, interval between training days per week), volume (number of repititions and number of sets), periodization (undulation, linearity, and conjugation), and time cycle (microcycle, mesocycle, and macrocycle) - that could fit my goals and ability. Since I started weightlifting, I have been using a journal to plan and log my workouts every week. 
 
 ## Data Selection/Entry
-Because my workout data is kept in a journal, I created a Python file, `<weightlifting-workout-data-cleanup.py>`, which allowed me to input the data and write it to a .csv file `<workout_data_raw.csv`>.  
+Because my workout data is kept in a journal, I created a Python file, [`<weightlifting-workout-data-cleanup.ipynb>`](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/weightlifting-workout-data-cleanup.ipynb), which allowed me to input the data and write it to a .csv file [`<workout_data_raw.csv`>](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/workout_data_raw.csv).  
 
 When logging my workout data into this repository, I only included the following metrics:
 * Exercise, 
 * Number of Sets, 
 * Number of Reps, 
-* Weight in Lbs, 
+* Weight in lbs, 
 * Date
 * Time, and
-* Duration of complete workout including warm-up time in minutes. 
+* Duration of complete workout including warm-up time in minutes.
+
 However, even some of these data points are empty/null, as I did not always remember to log the start time, end time, or duration of my workouts.
 
 There is selection bias in the data because I only chose to log the following compound exercises: 
-This workout data only takes into account the following exercises:
 * Back Squat, 
 * Overhead Squat, 
 * Front Squat, 
@@ -30,17 +30,18 @@ This workout data only takes into account the following exercises:
 * Snatch Press, 
 * Snatch, and 
 * Clean & Jerk. 
+
 Note that the back squat, bench press, and deadlift are the three competition lifts for powerlifting, and the snatch and clean & jerk are the two competition lifts for Olympic weightlifting. I include the overhead squat, front squat, and shoulder press, and snatch press because they are key supplemental exercises for improving in the snatch and clean & jerk. 
 
 ## Data Cleaning and Exporting
-After logging my workout data into `<workout_data_raw`>, I used Python's Pandas to clean the data. For instance, I used Pandas to make sure the exercises had consistent names; I filled the null values with -1, and I changed the date and time format to a consistent datetime format. Finally, I saved the dataframe of clean data as a .csv file `<workout_data_database.csv`>.
+After logging my workout data into [`<workout_data_raw.csv`>](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/workout_data_raw.csv), I used Python's Pandas to clean the data. For instance, I used Pandas to make sure the exercises had consistent names; I filled the null values with -1, and I changed the date and time format to a consistent datetime format. Finally, I saved the dataframe of clean data as a .csv file [`<workout_data_database.csv`>](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/workout_data_database.csv).
 
-Once I had a clean data set, I decided to use Python and MySQL Connector to insert the date from my `<workout_data_database.csv`> file into a `<workouts.db>` database file. I originally thought about creating a .db file with a few tables connected by primary and foreign keys, but I decided to just write it into one table. Ultimately, this step was not necessary to my project, but it served as a good opportunity for me to practice integrating Python and MySQL. 
+Once I had a clean data set, I decided to use Python and MySQL Connector to insert the date from my [`<workout_data_database.csv`>](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/workout_data_database.csv) file into a [`<workouts.db>`](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/workouts.db) database file. I originally thought about creating a .db file with a few tables connected by primary and foreign keys, but I decided to just write it into one table. Ultimately, this step was not necessary to my project, but it served as a good opportunity for me to practice integrating Python and MySQL. 
 
 ## Data Visualizations
-Once I had a clean data set, `<workout_data_database.csv`>, I used Tableau Public to create a few data visualization graphs. This process was fairly simple for me to do. 
+Once I had a clean data set, [`<workout_data_database.csv`>](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/workout_data_database.csv), I used Tableau Public to create a few data visualization graphs. This process was fairly simple for me to do. 
 
-I eventually decided to use Python's Pandas and Seaborn in my `<weightlifting-workout-data-visualizations>` file to see if I could replicate my Tableau visualizations. I spent much more time plotting my graphs using Pandas and Seaborn than I did using Tableau, but again, I see this as a good opportunity for practice. 
+I eventually decided to use Python's Pandas and Seaborn in my [`<weightlifting-workout-data-visualizations>`](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/weightlifting-workout-data-visualizations.ipynb) file to see if I could replicate my Tableau visualizations. I spent much more time plotting my graphs using Pandas and Seaborn than I did using Tableau, but again, I see this as a good opportunity for practice. 
 
 You can see my graphs in my [weightlifting-workout-data-visualizations.md](https://github.com/jemvega/weightlifting-workout-progress-log/blob/branch-jv/weightlifting-workout-data-visualizations.md)
 
@@ -62,7 +63,7 @@ Here are a few remarks I have after analyzing the data and stats:
 3. My Olympic lifts maxes are much lower than the powerlifting lifts maxes probably because they require much more technical profiency than I have. 
 4. A comparison between the volume and intensity graphs seems to show a strong inverse relationship between volume (total reps) and intensity (total weight lifted) per workout session. While one could say this is largely due to the inherent bias in my workout program and goals, this is a phenomenon that the weightlifting community has already observed. I will not discuss the merits of high volume vs high intensity training, but by definition, a lifter cannot perform their one repetition personal maximum for multiple seets or reps. Moreover, a program that utilizes high volume and high intensity at the same time will eventually place too much stress on a lifter and probably lead the lifter to injury. 
 5. One problem with my workout log as it stands is that it only shows when I did the 9 weightlifting exercises, but that does not necessarily mean that I did not workout on those non-recorded days. For instance, some times I run on non-lift days, or I do an active recovery day of bodyweight/calisthenic exercises.
-6. I suspect that over time, I will continue to see gaps around the holidays, like Thanksgiving week, Christmas, and New Year's, as well as over vacation days. 
+6. I suspect that over time, I will continue to see gaps around the holidays, like Thanksgiving, Christmas, and New Year's Day, as well as over vacation days. 
 
 ## Important Considerations
 I knowingly exclude the following data from this repository and workout log:
@@ -91,7 +92,7 @@ I understand that there are many factors that can affect fitness and overall hea
 As of right now, I have only been manually testing the app. I would like to create integration test checks and unit test checks. 
 
 ## Known Issues
-* I keep receiving a "FutureWarning: Using a non-tuple sequence for multidimensial indexing is deprecated;" in my `<weightlifting-workout-data-visualizations>` file for what I believe is a scipy issue. 
+* I keep receiving a "FutureWarning: Using a non-tuple sequence for multidimensial indexing is deprecated;" in my [`<weightlifting-workout-data-visualizations>`](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/weightlifting-workout-data-visualizations.ipynb) file for what I believe is a scipy issue. 
 
 ## Future Changes/Caculations/Features
 Here are some features I would like to add in the future:
@@ -122,5 +123,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.txt](https://github.com/jemvega/weightlifting-workout-progress-log/blob/master/LICENSE.txt) file for details
 
