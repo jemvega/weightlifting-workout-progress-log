@@ -108,7 +108,7 @@ Here are some features I would like to add in the future:
 
 * [Anaconda Navigator](https://docs.anaconda.com/anaconda/navigator/) GUI
 
-* [MySQL] (https://mysql.com) Database
+* [MySQL](https://mysql.com) Database
 
 * [Notepad++](https://notepad-plus-plus.org/) for README.md and LICENSE.txt
 
